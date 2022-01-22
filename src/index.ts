@@ -11,3 +11,10 @@
 //#region stage 2 add public static route
 // if there is time
 //#endregion
+import express from "express";
+const app = express();
+const port = 3000;
+app.listen(port , ()=>{
+    console.log("server working")
+})
+export default app;
