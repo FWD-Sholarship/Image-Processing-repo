@@ -5,7 +5,6 @@ export const isFileExist = async (fullPath : string):Promise<Boolean>=>{
       await filehandle.close()
       return true;
     }catch(e){
-        console.log(e)
       return false;
     }
 }

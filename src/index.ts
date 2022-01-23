@@ -22,13 +22,12 @@ app.use(morgan("tiny"));
 app.use('/api' ,apiRouter)
 
 app.use('*' , (req : Request , res : Response) =>{
-    const responseErr :ResponseError = {status :404 , message : messages.NotFoundRouteMessage}
-    res.status(404 ).send(responseErr)
+    throw new ResponseError( 404 , messages.NotFoundRouteMessage)
 })
-app.use(( err:Error , req:Request , res : Response , next : NextFunction ):void=>{
-    res.status(500).send(err.message)
+app.use(( err:ResponseError , req:Request , res : Response , next : NextFunction ):void=>{
+    res.status(err.status).json({message : err.message})
 })
 app.listen(port , ()=>{
-    console.log("server starts")
+    console.log("server working")
 })
 export default app;

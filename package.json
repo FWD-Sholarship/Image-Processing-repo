@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "npm run build && npx jasmine",
+    "test": "npx jasmine",
     "build": "npx tsc",
+    "start-build" : "npx tsc && nodemon dist",
     "start": "nodemon src/index.ts "
   },
   "keywords": [],
