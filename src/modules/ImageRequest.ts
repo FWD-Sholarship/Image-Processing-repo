@@ -1,10 +1,10 @@
-import { Request } from "express";
+import { Request } from 'express'
 interface ImageRequest extends Request {
-    width?: number ,
-    height?: number ,
-    fileName?: string,
-    processedFileName?:string ,
-    alreadyProcessed?: boolean 
+    width?: number
+    height?: number
+    fileName?: string
+    processedFileName?: string
+    alreadyProcessed?: boolean
 }
 
-export default ImageRequest;
+export default ImageRequest

@@ -1,5 +1,5 @@
 interface ImageSize {
-    width : (number | undefined) ,
-    height : (number | undefined)
+    width: number | undefined
+    height: number | undefined
 }
-export default ImageSize;
+export default ImageSize
