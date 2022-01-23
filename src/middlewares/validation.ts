@@ -5,13 +5,14 @@ import path from 'path';
 import sharp from "sharp";
 import { ImageSize, ResponseError } from '../modules';
 import messages from '../enmus/messages';
+import pathes from "../constants/constants"
 export const validationMW = async (req:Request , res : Response , next : NextFunction):Promise<void>=>{
     const { width  , height , filename } = req.query ;
     let imageRequest:ImageRequest = req;
     if(!filename)
        next( new ResponseError( 404 ,messages.NotProvidedImage));
     try {
-        if(!await isFileExist(path.resolve(__dirname , '../assets/images' , filename as string + '.jpg'))){
+        if(!await isFileExist(path.resolve(  pathes.imagePath , filename as string + '.jpg'))){
            next( new ResponseError( 404 ,messages.NotExistMessage)) 
         };
     } catch (error) {
@@ -23,7 +24,7 @@ export const validationMW = async (req:Request , res : Response , next : NextFun
         imageRequest.height = parseInt(height as string);
     const processedFileName:string = (filename as string) + '.thumbs.png';
     try {
-        if(await isFileExist(path.resolve(__dirname , "../assets/thumbs" , processedFileName ))){
+        if(await isFileExist(path.resolve(pathes.thumbsPath, processedFileName ))){
             imageRequest.alreadyProcessed = true;
          }
         
@@ -36,11 +37,11 @@ export const validationMW = async (req:Request , res : Response , next : NextFun
 }
 export const processImageMw = async (req:ImageRequest , res : Response , next : NextFunction):Promise<void>=>{
     
-    const image = sharp(path.resolve(__dirname ,"../assets/images",  req.fileName || ''   ) )
+    const image = sharp(path.resolve(pathes.imagePath,  req.fileName || ''   ) )
     try {
                 await image.resize({width : req.width , height : req.height})
                 .png({quality : 80 , compressionLevel : 9 , progressive: true  , adaptiveFiltering  : true})
-                .toFile(path.resolve(__dirname , "../assets/thumbs" ,  req.processedFileName || ''  ) )
+                .toFile(path.resolve( pathes.thumbsPath ,  req.processedFileName || ''  ) )
             next();
         } catch (error) {   
             next(new ResponseError( 500 , messages.serverErrorMessage ) )
