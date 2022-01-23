@@ -1,5 +1,6 @@
 # Image-Processing-repo
-
+## description
+    - serving images with size
 ## end points
 
 ### /api/image
@@ -15,3 +16,17 @@
 
 -   response
     -   route not exist
+
+## run scripts
+
+- npm start
+    - for development mode
+
+- npm run start-build
+    - for run in production mode
+
+- npm run test
+    - for run testing enviroment
+
+- npm run build
+    - for dist folder
