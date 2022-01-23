@@ -15,7 +15,7 @@ import express, {   NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import messages from "./enmus/messages";
 import apiRouter from "./routes/api";
-import ResponseError from "./modules/ResponseError"
+import {ResponseError } from "./modules"
 const app = express();
 const port = 3000;
 app.use(morgan("tiny"));
@@ -26,10 +26,9 @@ app.use('*' , (req : Request , res : Response) =>{
     res.status(404 ).send(responseErr)
 })
 app.use(( err:Error , req:Request , res : Response , next : NextFunction ):void=>{
-    console.log("error works")
     res.status(500).send(err.message)
 })
 app.listen(port , ()=>{
-    console.log("server working")
+    console.log("server starts")
 })
 export default app;
