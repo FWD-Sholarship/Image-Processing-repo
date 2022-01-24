@@ -1,2 +1,2 @@
-export { default as ResponseError } from './ResponseError'
-export { default as ImageSize } from './ImageSize'
+export { default as ResponseError } from './ResponseError';
+export { default as ImageSize } from './ImageSize';

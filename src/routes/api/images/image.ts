@@ -1,18 +1,25 @@
-import { Router, Response } from 'express'
-import path from 'path'
-import { validationMW, processImageMw } from '../../../middlewares/validation'
-import ImageRequest from '../../../modules/ImageRequest'
-import pathes from '../../../constants/constants'
-const imgRouter = Router()
+import { Router, Response } from 'express';
+import path from 'path';
+import {
+    validationsMiddleWares,
+    processImageMiddleWares,
+} from '../../../middlewares';
+import ImageRequest from '../../../modules/ImageRequest';
+import pathes from '../../../constants/constants';
+import fileExtensions from '../../../enmus/filesExtensions';
+const imgRouter = Router();
 imgRouter.get(
     '/',
-    [validationMW, processImageMw],
+    [...validationsMiddleWares, ...processImageMiddleWares],
     async (req: ImageRequest, res: Response): Promise<void> => {
-        res.setHeader('Cache-control', 'max-age=604800')
+        res.setHeader('Cache-control', 'max-age=604800');
         res.status(200).sendFile(
-            path.join(pathes.thumbsPath, req.processedFileName || ''),
+            path.join(
+                pathes.thumbsPath,
+                (req.fileName || '') + req.width + req.height + fileExtensions.thumbs  + fileExtensions.png
+            ),
             { cacheControl: true }
-        )
+        );
     }
-)
-export default imgRouter
+);
+export default imgRouter;

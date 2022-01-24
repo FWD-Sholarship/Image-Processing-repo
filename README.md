@@ -1,6 +1,9 @@
 # Image-Processing-repo
+
 ## description
+
     - serving images with size
+
 ## end points
 
 ### /api/image
@@ -19,14 +22,17 @@
 
 ## run scripts
 
-- npm start
-    - for development mode
+-   npm start
 
-- npm run start-build
-    - for run in production mode
+    -   for development mode
 
-- npm run test
-    - for run testing enviroment
+-   npm run start-build
 
-- npm run build
-    - for dist folder
+    -   for run in production mode
+
+-   npm run test
+
+    -   for run testing enviroment
+
+-   npm run build
+    -   for dist folder
